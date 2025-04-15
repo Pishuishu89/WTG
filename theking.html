@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The King 👑</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Dark mode toggle -->
+  <button class="toggle-btn" id="toggleMode">🌙</button>
+
+  <!-- Audio element -->
+  <audio id="goatAudio" src="lebron.mp3" preload="auto"></audio>
+
+  <main>
+    <img src="kingjames.png" alt="LeBron James" class="king-img" />
+    <h1 class="goat-message">Lebron James is the GOAT</h1>
+
+    <!-- Home icon -->
+    <a href="index.html" class="home-btn" title="Home">
+      <img src="home.png" alt="Home" />
+    </a>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Try to autoplay on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('goatAudio');
+      audio.play().catch(e => {
+        console.warn("Autoplay blocked. User must click to play.");
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+/* Reset and layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: white;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark {
+    background-color: #121212;
+    color: white;
+  }
+  
+  main {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Title card */
+  .title-card {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.dark .title-card {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Top-right toggle */
+  .toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark .toggle-btn {
+    background-color: #444;
+    color: white;
+  }
+  
+  /* Button layout */
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .goat-btn {
+    width: 150px;
+    height: 200px;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 6px;
+  }
+  
+  .goat-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ishu {
+    background-color: #6BAED6;
+  }
+  
+  .custom {
+    background-color: #F28C8C;
+  }
+  
+  .king {
+    background-color: #552583;
+  }
+
+.king-img {
+  max-width: 600px; /* 2x bigger */
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.goat-message {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.home-btn {
+    display: inline-block;
+    background-color: #ccc;
+    border-radius: 50%;
+    padding: 12px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .home-btn img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .home-btn:hover {
+    background-color: #aaa;
+  }
+  
+  .image-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .image-grid-2x2 img {
+    max-width: 700px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .image-grid-2x2 img:hover {
+    transform: scale(1.05);
+  }
+  
+
+  .survey-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .survey-form label {
+    font-size: 1.2rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .survey-form input {
+    width: 80px;
+    padding: 6px;
+    font-size: 1rem;
+  }
+  
+  .survey-form p {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  #goBtn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #goBtn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }

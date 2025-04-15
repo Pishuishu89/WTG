@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Model</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles to arrange instructions in two columns */
+    .instructions-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .instruction-box {
+      flex: 1 1 45%;
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    body.dark .instruction-box {
+      background-color: #333;
+      color: #eee;
+    }
+    .instruction-box h2 {
+      margin-bottom: 10px;
+    }
+    .instruction-box ol {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="toggleMode">🌙</button>
+
+  <main>
+    <h1>Create Your Own Model</h1>
+    
+    <p>
+      To make your own model, please download the zip file named <strong>"WTG_User"</strong> from 
+      <a href="https://github.com/Pishuishu89/WhoTheGoat" target="_blank">GitHub</a>. 
+      Please ensure you have Java and Flask installed before running the code.
+    </p>
+    
+    <div class="instructions-container">
+      <div class="instruction-box">
+        <h2>Running It Natively</h2>
+        <ol>
+          <li>Unzip the file.</li>
+          <li>Open <code>userMachine.py</code>.</li>
+          <li>Change the user inputs on line 195 (must equal 100 to run properly).</li>
+          <li>Open the command prompt in the folder.</li>
+          <li>Type <code>py userMachine.py</code> and wait 5-10 minutes for the code to run.</li>
+          <li>The visualizations will be saved to the <strong>WTG_User</strong> folder.</li>
+        </ol>
+      </div>
+      <div class="instruction-box">
+        <h2>Running It on Browser</h2>
+        <ol>
+          <li>Unzip the file.</li>
+          <li>Open the command prompt in the folder.</li>
+          <li>Type <code>py app.py</code> and copy the browser link it provides.</li>
+          <li>Change the numbers to equal 100% and wait 5-10 minutes for the visualization to load.</li>
+        </ol>
+      </div>
+    </div>
+    
+    <a href="index.html" class="home-btn" title="Home">
+      <img src="home.png" alt="Home" />
+    </a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
