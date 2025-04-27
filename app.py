@@ -1,51 +1,57 @@
-from flask import Flask, render_template, request, jsonify
+import streamlit as st
 import io
 import base64
-import matplotlib
-matplotlib.use('Agg')  # Use a non-interactive backend
-from userMachine import run_model  # type: ignore # This module contains your converted notebook code
+import matplotlib.pyplot as plt
+from userMachine import run_model  # make sure userMachine.py is present
 
-app = Flask(__name__)
+# Streamlit page setup
+st.set_page_config(page_title="WhoTheGOAT - MVP Predictor", layout="centered")
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+st.title("🏀 WhoTheGOAT - NBA MVP Predictor")
 
-@app.route('/update', methods=['POST'])
-def update():
-    try:
-        # Retrieve user input values from the form and convert them to floats.
-        pts = float(request.form.get('pts', 0))
-        ast = float(request.form.get('ast', 0))
-        trb = float(request.form.get('trb', 0))
-        blk = float(request.form.get('blk', 0))
-        
-        # Package the input values as a dictionary.
-        user_input_percentages = {
-            'PTS': pts,
-            'AST': ast,
-            'TRB': trb,
-            'BLK': blk
-        }
-        
-        # Validate that the percentages sum to 100.
-        if sum(user_input_percentages.values()) != 100:
-            return jsonify({'error': 'The total of percentages must equal 100.'})
-        
-        # Run your ML model with the user inputs.
-        # run_model returns a dictionary of figure objects.
-        fig_dict = run_model(user_input_percentages)
-        
-        # In this example, we choose to send the 'top_5_mvp' figure.
-        fig = fig_dict['top_5_mvp']
-        buf = io.BytesIO()
-        fig.savefig(buf, format='png')
-        buf.seek(0)
-        img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
-        
-        return jsonify({'img_base64': img_base64})
-    except Exception as e:
-        return jsonify({'error': str(e)})
+st.write("Assign a percentage weight (must add to 100%) to the following stats:")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Create a form for user input
+with st.form("input_form"):
+    pts = st.number_input("Points (PTS) %", min_value=0.0, max_value=100.0, value=0.0)
+    ast = st.number_input("Assists (AST) %", min_value=0.0, max_value=100.0, value=0.0)
+    trb = st.number_input("Rebounds (TRB) %", min_value=0.0, max_value=100.0, value=0.0)
+    blk = st.number_input("Blocks (BLK) %", min_value=0.0, max_value=100.0, value=0.0)
+
+    submit_button = st.form_submit_button(label="Predict MVPs")
+
+# If the button is clicked
+if submit_button:
+    user_input_percentages = {
+        'PTS': pts,
+        'AST': ast,
+        'TRB': trb,
+        'BLK': blk
+    }
+
+    # Validate total
+    if sum(user_input_percentages.values()) != 100:
+        st.error("❌ The total of percentages must equal 100. Please adjust.")
+    else:
+        try:
+            # Run the model
+            fig_dict = run_model(user_input_percentages)
+
+            st.success("✅ Prediction successful! Here are the results:")
+
+            # Display the top 5 MVP figure
+            st.subheader("Top 5 Predicted MVPs 📈")
+            st.pyplot(fig_dict['top_5_mvp'])
+
+            # (Optional) Display other plots if you want
+            with st.expander("See Feature Importance Chart"):
+                st.pyplot(fig_dict['feature_importance'])
+
+            with st.expander("See Error Metrics Chart"):
+                st.pyplot(fig_dict['error_metrics'])
+
+            with st.expander("See R² Backtest Over Time"):
+                st.pyplot(fig_dict['r2_backtest'])
+
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
